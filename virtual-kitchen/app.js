@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 // Serve static files from /public
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Middleware to parse URL-encoded data (e.g., from forms)
+// Middleware to parse URL-encoded data
 app.use(express.urlencoded({ extended: false }));
 
 // Configure session
