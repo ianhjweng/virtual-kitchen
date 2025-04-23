@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Ian's Virtual Kitchen</title>
+    <link rel="icon" href="/images/Ian's VK Logo.png" type="image/png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home_and_contact_title_styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script defer src="/js/main.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar: Has links to all the different pages -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <header id="main-header" class="bg-light p-3 text-center">
+                <h1><img src="/images/Ian's VK Logo.png" alt="Ian's Virtual Kitchen"></h1>
+            </header>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/recipes">Recipes</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/contact">Contact</a></li>
+                    <% if (session && session.user) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/recipes/add">Add Recipe</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout (<%= session.user.username %>)</a></li>
+                        <% } else { %>
+                            <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                            <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content: Essentially the actual content on my contact page -->
+    <main class="container mt-5">
+        <section class="title mx-auto text-center" style="max-width: 600px;">
+            <h2>Contact Me</h2>
+            <p class="description">Want a private cooking lesson? Book here!</p>
+        </section>
+
+        <!-- Contact Form -->
+        <form id="contactForm">
+            <section class="title mx-auto" style="max-width: 600px;">
+                <div class="mb-3 text-start">
+                    <label for="name">Your Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label for="contactMethod">Preferred Contact Method</label>
+                    <select class="form-control" id="contactMethod" required onchange="toggleContactFields()">
+                        <option value="" disabled selected>Select contact method</option>
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                    </select>
+                </div>
+
+                <div id="emailSection" style="display: none;">
+                    <div class="mb-3 text-start">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label for="confirmEmail">Confirm Email Address</label>
+                        <input type="email" class="form-control" id="confirmEmail" placeholder="Re-enter your email">
+                    </div>
+                </div>
+
+                <div id="phoneSection" style="display: none;">
+                    <div class="mb-3 text-start">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label for="confirmPhone">Confirm Phone Number</label>
+                        <input type="tel" class="form-control" id="confirmPhone"
+                            placeholder="Re-enter your phone number">
+                    </div>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label for="appointmentDate">Select Appointment Date</label>
+                    <input type="date" class="form-control" id="appointmentDate" required>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label for="message">Your Message</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Type your message here..."
+                        required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+            </section>
+        </form>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="text-center bg-light p-3 mt-5">
+        <p>&copy; 2025 Ian's Virtual Kitchen. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

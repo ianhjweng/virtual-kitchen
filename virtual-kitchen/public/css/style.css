@@ -1,0 +1,75 @@
+/* General Page Styling */
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Albert Sans';
+    font-size: 18px;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+main {
+    flex: 1;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 10px;
+}
+
+/* Navbar Styling */
+.navbar {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.6rem;
+    margin-right: 30px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff5757 !important;
+    transform: scale(1.1);
+}
+
+.navbar-nav .nav-link.active {
+    color: #ff5757 !important;
+    transform: scale(1.1);
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #ff5757;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    background-color: #c74646;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: #666;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
+}

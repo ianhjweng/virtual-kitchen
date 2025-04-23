@@ -1,0 +1,42 @@
+/* Title Styling */
+
+.title {
+    background: #ffffff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    padding-top: 20px;
+}
+
+.title h2 {
+    color: #ff5757;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.title h3 {
+    color: #ff8757;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.title h4 {
+    color: #ffa857;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* List Styling */
+.title ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.title ul li {
+    margin-bottom: 5px;
+}

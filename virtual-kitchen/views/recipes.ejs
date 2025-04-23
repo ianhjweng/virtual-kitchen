@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes | Ian's Virtual Kitchen</title>
+    <link rel="icon" href="/images/Ian's VK Logo.png" type="image/png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/recipesstyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script defer src="/js/main.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar: Has links to all the different pages -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <header id="main-header" class="bg-light p-3 text-center">
+                <h1><img src="/images/Ian's VK Logo.png" alt="Ian's Virtual Kitchen"></h1>
+            </header>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/recipes">Recipes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+
+                    <% if (session && session.user) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/recipes/add">Add Recipe</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout (<%= session.user.username %>)</a></li>
+                        <% } else { %>
+                            <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                            <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content: Essentially the actual content on my recipes page -->
+    <main class="container mt-5">
+
+        <form class="mb-4" action="/recipes/search" method="GET">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <input type="text" name="name" class="form-control" placeholder="Search by recipe name">
+                </div>
+                <div class="col-md-4 mb-2">
+                    <select name="type" class="form-control">
+                        <option value="">All Types</option>
+                        <option value="Italian">Italian</option>
+                        <option value="French">French</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </div>
+        </form>
+
+
+        <section id="recipes">
+            <% recipes.forEach(recipe=> { %>
+                <article class="recipe">
+                    <h2 class="title">
+                        <a href="/recipes/<%= recipe.rid %>" class="text-decoration-none text-dark">
+                            <%= recipe.name %> Recipe
+                        </a>
+                    </h2>
+                    <p class="description">
+                        <%= recipe.description %>
+                    </p>
+
+                    <div class="image-container">
+                        <img src="/images/<%= recipe.image %>" alt="<%= recipe.name %>" class="recipe-img">
+                        <br><br>
+                    </div>
+
+                    <ul class="details">
+                        <li><strong>Type:</strong>
+                            <%= recipe.type %>
+                        </li>
+                    </ul>
+
+                    <ul class="details">
+                        <li><strong>Cooking Time:</strong>
+                            <%= recipe.Cookingtime %> Mins
+                        </li>
+                    </ul>
+
+                    <h5>Ingredients:</h5>
+                    <ul class="ingredients-list">
+                        <% recipe.ingredients.split(',').forEach(item=> { %>
+                            <li class="ingredients">
+                                <%= item.trim() %>
+                            </li>
+                            <% }) %>
+                    </ul>
+
+                    <h5>Instructions:</h5>
+                    <ol class="instructions">
+                        <% recipe.instructions.split(',').forEach(step=> { %>
+                            <% if (step.trim()) { %>
+                                <li class="cooking-step">
+                                    <%= step.trim() %>.
+                                </li>
+                                <% } %>
+                                    <% }) %>
+                    </ol>
+
+                    <% if (session && session.user && recipe.uid===session.user.uid) { %>
+                        <a href="/recipes/edit/<%= recipe.rid %>" class="btn btn-warning mt-3 me-2">Edit</a>
+
+                        <form action="/recipes/delete/<%= recipe.rid %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger mt-3"
+                                onclick="return confirm('Confirm you want to delete this recipe.');">
+                                Delete
+                            </button>
+                        </form>
+                        <% } %>
+                </article>
+                <% }); %>
+        </section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center bg-light p-3 mt-5">
+        <p>&copy; 2025 Ian's Virtual Kitchen. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
