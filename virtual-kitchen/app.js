@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
@@ -41,6 +40,7 @@ app.get('/register', (req, res) => {
     res.render('register', { session: req.session });
 });
 
+// Registration
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -68,6 +68,7 @@ app.get('/login', (req, res) => {
     res.render('login', { error: null, session: req.session });
 });
 
+// Logging in
 app.post('/login', (req, res) => {
     const { identifier, password } = req.body;
 
@@ -95,6 +96,7 @@ app.post('/login', (req, res) => {
     });
 });
 
+// Logging out
 app.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) console.error(err);
